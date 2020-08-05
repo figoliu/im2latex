@@ -37,7 +37,7 @@ class DataGenerator(object):
     """Data Generator of tuple (image, formula)"""
 
     def __init__(self, path_formulas, dir_images, path_matching, bucket=False,
-                form_prepro=lambda s: s.strip().split(' '), iter_mode="data",
+                form_prepro=lambda s: s.strip().split(" "), iter_mode="data",
                 img_prepro=lambda x: x, max_iter=None, max_len=None,
                 bucket_size=20):
         """Initializes the DataGenerator
@@ -114,7 +114,7 @@ class DataGenerator(object):
             data_buckets[s] += [(img_path, formula_id)]
 
         # write the rest of the buffer
-        for k, v in data_buckets.iteritems():
+        for k, v in data_buckets.items():
             for (img_path, formula_id) in v:
                 bucketed_dataset += [(img_path, formula_id)]
 
@@ -171,7 +171,11 @@ class DataGenerator(object):
 
         img = imread(self._dir_images + "/" + img_path)
         img = self._img_prepro(img)
-        formula = self._form_prepro(self._get_raw_formula(formula_id))
+        formula = self._get_raw_formula(formula_id)
+        formula = self._form_prepro(formula)
+
+        # For python3, transfer to list.
+        formula = list(formula)
 
         if self._iter_mode == "data":
             inst = (img, formula)
@@ -179,7 +183,8 @@ class DataGenerator(object):
             inst = (img, formula, img_path, formula_id)
 
         # filter on the formula length
-        if self._max_len is not None and len(formula) > self._max_len:
+        # len(formula)
+        if self._max_len is not None and len(formula)> self._max_len:
             skip = True
         else:
             skip = False

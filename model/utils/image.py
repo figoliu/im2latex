@@ -18,13 +18,15 @@ def get_max_shape(arrays):
         images: list of arrays
 
     """
-    shapes = map(lambda x: list(x.shape), arrays)
-    ndim = len(arrays[0].shape)
-    max_shape = []
-    for d in range(ndim):
-        max_shape += [max(shapes, key=lambda x: x[d])[d]]
+    # shapes = map(lambda x: list(x.shape), arrays)
+    # ndim = len(arrays[0].shape)
+    # max_shape = []
+    # for d in range(ndim):
+    #     max_shape += [max(shapes, key=lambda x: x[d])[d]]
 
-    return max_shape
+    # return max_shape
+    shapes = list(map(lambda x: list(x.shape), arrays))
+    return [max(x) for x in zip(*shapes)]
 
 
 def pad_batch_images(images, max_shape=None):
@@ -34,7 +36,6 @@ def pad_batch_images(images, max_shape=None):
         target_shape: shape at which we want to pad
 
     """
-
     # 1. max shape
     if max_shape is None:
         max_shape = get_max_shape(images)
@@ -184,7 +185,7 @@ def convert_to_png(formula, dir_output, name, quality=100, density=200,
 
         return "{}.png".format(name)
 
-    except Exception, e:
+    except Exception as e:
         print(e)
         clean(dir_output, name)
         return False

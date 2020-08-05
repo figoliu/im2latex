@@ -177,7 +177,7 @@ class BaseModel(object):
         return best_score
 
 
-    def _run_epoch(config, train_set, val_set, epoch, lr_schedule):
+    def _run_epoch(self, config, train_set, val_set, epoch, lr_schedule):
         """Model_specific method to overwrite
 
         Performs an epoch of training
@@ -227,7 +227,7 @@ class BaseModel(object):
         return scores
 
 
-    def _run_evaluate(config, test_set):
+    def _run_evaluate(self, config, test_set):
         """Model-specific method to overwrite
 
         Performs an epoch of evaluation

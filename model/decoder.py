@@ -4,12 +4,11 @@ from tensorflow.python.util import nest
 import tensorflow.contrib.layers as layers
 from tensorflow.contrib.rnn import GRUCell, LSTMCell
 
-
-from components.dynamic_decode import dynamic_decode
-from components.attention_mechanism import AttentionMechanism
-from components.attention_cell import AttentionCell
-from components.greedy_decoder_cell import GreedyDecoderCell
-from components.beam_search_decoder_cell import BeamSearchDecoderCell
+from model.components.dynamic_decode import dynamic_decode
+from model.components.attention_mechanism import AttentionMechanism
+from model.components.attention_cell import AttentionCell
+from model.components.greedy_decoder_cell import GreedyDecoderCell
+from model.components.beam_search_decoder_cell import BeamSearchDecoderCell
 
 
 class Decoder(object):

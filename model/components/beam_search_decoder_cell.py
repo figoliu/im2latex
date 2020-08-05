@@ -4,40 +4,40 @@ from tensorflow.python.util import nest
 from tensorflow.contrib.rnn import RNNCell
 
 
-from dynamic_decode import transpose_batch_time
-from greedy_decoder_cell import DecoderOutput
+from .dynamic_decode import transpose_batch_time
+from .greedy_decoder_cell import DecoderOutput
 
 
-class BeamSearchDecoderCellState(collections.namedtuple(
-        "BeamSearchDecoderCellState", ("cell_state", "log_probs"))):
-    """State of the Beam Search decoding
+# class BeamSearchDecoderCellState(collections.namedtuple(
+#         "BeamSearchDecoderCellState", ("cell_state", "log_probs"))):
+#     """State of the Beam Search decoding
 
-    cell_state: shape = structure of [batch_size, beam_size, ?]
-        cell state for all the hypotheses
-    embedding: shape = [batch_size, beam_size, embedding_size]
-        embeddings of the previous time step for each hypothesis
-    log_probs: shape = [batch_size, beam_size]
-        log_probs of the hypotheses
-    finished: shape = [batch_size, beam_size]
-        boolean to know if one beam hypothesis has reached token id_end
+#     cell_state: shape = structure of [batch_size, beam_size, ?]
+#         cell state for all the hypotheses
+#     embedding: shape = [batch_size, beam_size, embedding_size]
+#         embeddings of the previous time step for each hypothesis
+#     log_probs: shape = [batch_size, beam_size]
+#         log_probs of the hypotheses
+#     finished: shape = [batch_size, beam_size]
+#         boolean to know if one beam hypothesis has reached token id_end
 
-    """
-    pass
+#     """
+#     pass
 
 
-class BeamSearchDecoderOutput(collections.namedtuple(
-        "BeamSearchDecoderOutput", ("logits", "ids", "parents"))):
-    """Stores the logic for the beam search decoding
+# class BeamSearchDecoderOutput(collections.namedtuple(
+#         "BeamSearchDecoderOutput", ("logits", "ids", "parents"))):
+#     """Stores the logic for the beam search decoding
 
-    logits: shape = [batch_size, beam_size, vocab_size]
-        scores before softmax of the beam search hypotheses
-    ids: shape = [batch_size, beam_size]
-        ids of the best words at this time step
-    parents: shape = [batch_size, beam_size]
-        ids of the beam index from previous time step
+#     logits: shape = [batch_size, beam_size, vocab_size]
+#         scores before softmax of the beam search hypotheses
+#     ids: shape = [batch_size, beam_size]
+#         ids of the best words at this time step
+#     parents: shape = [batch_size, beam_size]
+#         ids of the beam index from previous time step
 
-    """
-    pass
+#     """
+#     pass
 
 
 class BeamSearchDecoderCell(object):
